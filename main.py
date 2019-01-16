@@ -17,16 +17,18 @@ class HelloWorld(Resource):
     def get(self):
         return {'hello' : 'world'}
 
-class House(ndb.Model):
-    address = db.StringProperty()
-    json_property = ndb.JsonProperty()
-    indexed_int = ndb.IntegerProperty()
-    unindexed_int = ndb.IntegerProperty(indexed=False)
-    text_property = ndb.TextProperty()
+@app.route('/main')
+def index_page():
+    return render_template('index.html')
 
-class Room(ndb.Model):
-    house = ndb.KeyProperty(kind=House)
+
+
+class Restroom(ndb.Model):
     name = ndb.StringProperty()
+    NumOfRooms = ndb.IntegerProperty()
+    NumOfVacantRooms = ndb.IntegerProperty()
 
-admin.add_view(appengine.ModelView(House))
-admin.add_view(appengine.ModelView(Room))
+
+
+admin.add_view(appengine.ModelView(Restroom))
+
