@@ -24,6 +24,17 @@ def index_page():
     restrooms = Restroom.get_list().fetch();
     return render_template('index.html',restrooms = restrooms)
 
+@api.route('/clear')
+class Clear(Resource):
+    def get(self):
+
+        restrooms = Restroom.get_list().fetch();
+        for restroom in restrooms:
+            restroom.NumOfVacantRooms = 0
+            restroom.put()
+
+        return {'status' : 'ok'}
+
 # API for Decreasing the number of vacant rooms
 @api.route('/Down/<string:url>')
 class Down(Resource):
