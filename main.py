@@ -25,7 +25,7 @@ def index_page():
     return render_template('index.html',restrooms = restrooms)
 
 # API for Decreasing the number of vacant rooms
-@api.route('/Down<string:url>')
+@api.route('/Down/<string:url>')
 class Down(Resource):
     def get(self,url):
         targetKey = ndb.Key(urlsafe=url)
