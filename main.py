@@ -24,10 +24,9 @@ def index_page():
     restrooms = Restroom.get_list().fetch();
     return render_template('index.html',restrooms = restrooms)
 
-# API for increasing the number of users
-# It means that the number of vacant rooms will be decreased.
-@api.route('/Up/<string:url>')
-class Up(Resource):
+# API for Decreasing the number of vacant rooms
+@api.route('/Down<string:url>')
+class Down(Resource):
     def get(self,url):
         targetKey = ndb.Key(urlsafe=url)
         target = targetKey.get()
@@ -46,10 +45,9 @@ class Up(Resource):
 
 
 
-# API for increasing the number of users
-# It means that the number of vacant rooms will be decreased.
-@api.route('/Down/<string:url>')
-class Down(Resource):
+# API for increasing the number of vacant rooms
+@api.route('/Up/<string:url>')
+class Up(Resource):
     def get(self,url):
         targetKey = ndb.Key(urlsafe=url)
         target = targetKey.get()
